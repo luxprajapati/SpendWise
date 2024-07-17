@@ -3,7 +3,8 @@
 import styled from "styled-components";
 import Tracker from "./components/Tracker";
 import GlobalStyles from "./globalStyles";
-import { ThemeProvider, useTheme } from "./ThemeContext";
+import { ThemeProvider, useTheme, lightTheme } from "./ThemeContext"; // Import lightTheme and darkTheme
+import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
 
 const Main = styled.div`
   display: flex;
@@ -25,16 +26,22 @@ const ToggleButton = styled.button`
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 `;
 
 const App = () => {
-  const { toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <Main>
       <GlobalStyles />
       <Tracker />
-      <ToggleButton onClick={toggleTheme}>Toggle Dark Mode</ToggleButton>
+      <ToggleButton onClick={toggleTheme}>
+        {theme === lightTheme ? <MdDarkMode /> : <MdOutlineLightMode />}
+        {theme === lightTheme ? "Dark Mode" : "Light Mode"}
+      </ToggleButton>
     </Main>
   );
 };

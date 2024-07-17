@@ -1,11 +1,11 @@
-// FileName: ThemeContext.js
+// ThemeContext.js
 
 import React, { createContext, useState, useContext } from "react";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
 const ThemeContext = createContext();
 
-const lightTheme = {
+export const lightTheme = {
   background: "#fff",
   color: "#000",
   borderColor: "#000",
@@ -13,7 +13,7 @@ const lightTheme = {
   buttonTextColor: "#fff",
 };
 
-const darkTheme = {
+export const darkTheme = {
   background: "#333",
   color: "#fff",
   borderColor: "#444",

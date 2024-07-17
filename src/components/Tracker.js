@@ -1,9 +1,11 @@
 // Tracker.js
+
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AddTransaction from "./AddTransaction";
 import OverviewComponent from "./OverviewComponent";
 import TransactionsContainer from "./TransactionsContainer";
+import { useTheme, lightTheme } from "../ThemeContext"; // Import useTheme, lightTheme, and darkTheme
 
 const Container = styled.div`
   display: flex;
@@ -13,9 +15,11 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.background};
   color: ${({ theme }) => theme.color};
   padding: 30px 20px;
-  border: 1px solid ${({ theme }) => theme.borderColor};
+
   border-radius: 5px;
   margin: 10px;
+  box-shadow: ${({ theme }) =>
+    theme === lightTheme ? "0 0 10px black" : "0 0 10px white"};
 `;
 
 const Heading = styled.h1`
@@ -50,6 +54,7 @@ const ExpenseBox = styled.div`
 const IncomeBox = styled(ExpenseBox)``;
 
 const Tracker = () => {
+  const { theme } = useTheme(); // Get the current theme
   const [toggle, setToggle] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const [income, setIncome] = useState(0);
@@ -98,8 +103,8 @@ const Tracker = () => {
   };
 
   return (
-    <Container>
-      <Heading>Expense Tracker</Heading>
+    <Container theme={theme}>
+      <Heading>SpendWise</Heading>
       <OverviewComponent
         toggle={toggle}
         setToggle={setToggle}
