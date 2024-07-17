@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+// FileName: App.js
 
-function App() {
+import styled from "styled-components";
+import Tracker from "./components/Tracker";
+import GlobalStyles from "./globalStyles";
+import { ThemeProvider, useTheme } from "./ThemeContext";
+
+const Main = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.color};
+  height: 100vh;
+  width: 100%;
+`;
+
+const ToggleButton = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: ${({ theme }) => theme.buttonBackground};
+  color: ${({ theme }) => theme.buttonTextColor};
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+`;
+
+const App = () => {
+  const { toggleTheme } = useTheme();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Main>
+      <GlobalStyles />
+      <Tracker />
+      <ToggleButton onClick={toggleTheme}>Toggle Dark Mode</ToggleButton>
+    </Main>
   );
-}
+};
 
-export default App;
+const WrappedApp = () => (
+  <ThemeProvider>
+    <App />
+  </ThemeProvider>
+);
+
+export default WrappedApp;
