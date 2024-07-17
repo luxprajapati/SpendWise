@@ -67,6 +67,7 @@ const Tracker = () => {
   useEffect(() => {
     localStorage.setItem("transactions", JSON.stringify(transactions));
     calculate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [transactions]);
 
   const AddTransactions = (data) => {
